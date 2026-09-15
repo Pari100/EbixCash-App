@@ -7,15 +7,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-.mobile-menu-item {
-  transition: background-color 150ms ease, color 150ms ease;
-}
-
-.mobile-menu-item.active {
-  background-color: #0041ce !important;
-  color: #ffffff !important;
-}
-
 
 
 html,
@@ -27,7 +18,6 @@ body,
   font-style: normal;
   overflow-x: clip;
 }
-
 
 .animate-marqee{
     overflow: hidden;
@@ -107,7 +97,7 @@ h1{
 }
 
 .train-animation {
-  animation: train-across-footer 7s linear infinite;
+  animation: train-across-footer 14s linear infinite;
   will-change: transform;
 }
 
@@ -230,10 +220,9 @@ h1{
       font-style: normal;
       font-weight: 100;
       font-size: 25px;
-      background: linear-gradient(25deg, #0139f0, rgb(0, 53, 213));
+      background: linear-gradient(25deg, #0540ff, rgb(0, 64, 255));
       border: 1px solid rgb(110, 144, 255);
 }
-
 .herobtn:hover{
     background: linear-gradient(90deg, #1807ff, rgb(2, 37, 142));
 }
@@ -301,13 +290,23 @@ h1{
   font-size: large;
   font-weight: bolder;
 }
+.servicetext{
 
+   font-family: "DM Sans", sans-serif;
+   font-weight: 300;
+   font-size: 10px;
+}
 .serviceheading{
   font-family: "DM Sans", sans-serif;
    font-weight: 200;
    font-size: 14px;
 }
+.investors{
 
+   font-weight: bold;
+   font-size: 12px;
+
+}
 
 .service{
   color:rgb(0, 27, 108);
