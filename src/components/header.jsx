@@ -533,7 +533,7 @@ function Header() {
     <div className="w-full md:w-[50rem] m-0 mt-6 md:m-10 md:mt-8 aboutheading">
     <h1 className="  md:p-0 text-blue-400 text-5xl text-center" style={{fontFamily: "DM Sans", fontWeight: "400"}}>About EbixCash</h1>
     <div className="w-90 md:w-full  mx-auto bg-white border-t border-white "></div>
-    <ul className="aboutdescription text-xl md:text-3xl pl-4 pr-4 pt-1 md:p-0 mt-[-130px] text-white">
+    <ul className="aboutdescription text-xl md:text-3xl pl-4  pr-4 pt-1 md:p-0 mt-[-130px] text-white">
       <li>EbixCash, has today emerged as India’s largest end-to-end financial exchange, that includes a last mile network of over 650,000 physical distribution outlets besides an omni-channel online digital platform. 
            EbixCash converges front-end distribution channels with back-end technology functions, across the payments solutions, travel, insurance and financial technology industries.</li>
       <li className="hidden md:block">The EbixCash Exchange employs more than 10,431 employees across different sectors with 196 offices across the Asia Pacific region. 
