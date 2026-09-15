@@ -359,8 +359,8 @@ function Header() {
                     boxShadow: `0 0 10px #00D4FF, 0 0 20px #00D4FF`
                   }}
                 ></span>Enough for every happiness</div>
-          <h1 className='reveal-on-load flex justify-center items-center w-[calc(100vw-2rem)] max-w-[1200px] mt-5 md:mt-7 text-[27px] md:text-[46px] text-blue-200 whitespace-normal leading-[1.2]' style={{fontFamily: "Space Grotesk", fontWeight: `lighter`, lineHeight: 1.2 }}>India’s Largest End-to-End Financial Exchange</h1>
-          <p className="reveal-on-load mt-2 md:mt-0 w-full text-[10px] md:text-xl  text-blue-100 text-nowrap md:text-nowrap font-lighter " style={{fontFamily: "DM Sans"}} >Powering payments, travel, forex, remittance,
+          <h1 className='reveal-on-load flex justify-center items-center w-[calc(100vw-2rem)] max-w-[1200px] mt-5 md:mt-7 text-[28px] md:text-[46px] text-blue-200 whitespace-normal leading-[1.2]' style={{fontFamily: "Space Grotesk", fontWeight: `lighter`, lineHeight: 1.2 }}>India’s Largest End-to-End Financial Exchange</h1>
+          <p className="reveal-on-load mt-2 md:mt-0  text-[8px] md:text-xl  text-blue-100 text-nowrap md:text-nowrap font-lighter " style={{fontFamily: "DM Sans"}} >Powering payments, travel, forex, remittance,
              and financial technology through a vast <br></br> phygital network of 650,000+ outlets across India.
           </p>
 
@@ -503,7 +503,7 @@ function Header() {
                 <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">More Services</li>
               </ul>
             </div>
-            <button className="float-right mt-[-10px] mr-7 text-white rotate-180"><img src={swipe} alt="Swipe" className="w-8 md:w-10"/></button>
+            <button className="float-right mt-[-4px] mr-7 text-white rotate-180"><img src={swipe} alt="Swipe" className="w-8 md:w-10"/></button>
           </div>
         </div>
 
@@ -521,7 +521,7 @@ function Header() {
         </div>
      
      
-     <div className="flex flex-nowrap  mt-10 rounded-xl text-[13px] py-2 px-4 bg-blue-100" style={{fontFamily: "Sans-serif"}}>
+     <div className="flex flex-nowrap  mt-10 rounded-xl text-[13px] py-2 px-4 bg-blue-100 m-3 md:m-0 " style={{fontFamily: "DM Sans"}}>
       <span className="border-r flex justify-center bg-blue-100 w-[12rem] h-[3rem] white bottom-75 text-center  text-black  px-1 py-1" ><img className="mr-2" src={employees} style={{width: `26px`, height: `26px`}} />10,431<br></br> Employees</span>
       <span className="border-r flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={residential} style={{width: `26px`, height: `26px`}} /> 22+ years<br></br> in Business</span>
       <span className=" flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={globe} style={{width: `25px`, height: `25px`}} /> 196 countries<br></br>offices</span>
