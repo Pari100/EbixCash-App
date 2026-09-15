@@ -91,6 +91,7 @@ import train from '../assets/train.png'
 
 function Header() {
 
+  const [isClicked, setClicked] = useState(false);
   const [footerOpen, setFooterOpen] = useState({
     discover: false,
     investors: false,
@@ -98,8 +99,17 @@ function Header() {
     business: false,
     ppi: false,
   });
+  const [mobileOpen, setMobileOpen] = useState({
+    discover: false,
+    company: false,
+    services: false,
+  });
+  const [activeMobileItem, setActiveMobileItem] = useState('home');
   const toggleFooterSection = (section) => {
     setFooterOpen((current) => ({ ...current, [section]: !current[section] }));
+  };
+  const toggleMobileSection = (section) => {
+    setMobileOpen((current) => ({ ...current, [section]: !current[section] }));
   };
   const imageprop = {
      backgroundImage: `url(${image})`,
@@ -224,6 +234,7 @@ function Header() {
  
   
   return (
+     
      <div>
       <div className="container min-w-screen">
         <div className="w-full animate-marqee border-b-2 border-blue-600">
@@ -276,12 +287,70 @@ function Header() {
               </ul>
             </div>
 
-            <div className="w-8 h-8 absolute right-8 mt-2 md:hidden">
-               <img src={menu} alt="menu"  />
+            <div className="w-8 h-8 absolute right-8 mt-2 md:hidden z-10 ">
+              {
+                isClicked ? <div className="text-3xl font-bold" onClick={() => setClicked(false)}>X</div> : <img src={menu} alt="menu" onClick={() => setClicked(true)} />
+              }
+               <div className={`${isClicked ? 'block' : 'hidden'} w-[100vw] h-[100vh] bg-white absolute z-58 top-0 right-[-200px]` }>
+                  <div>
+                    <div className="text-3xl font-bold absolute w-full h-10 left-60 top-0  " onClick={() => setClicked(false)}>X</div>
+                  <ul className="flex flex-col text-[14px] mt-10 " style={{fontFamily: "DM Sans"}}>
+                    <li className={`mobile-menu-item ${activeMobileItem === 'home' ? 'active' : ''} flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none p-2`} onClick={() => setActiveMobileItem('home')}>
+                    <p className="font-medium text-[17px] md:text-[15px] ">Home</p></li>
+                   
+                     <li className={`mobile-menu-item ${activeMobileItem === 'discover' ? 'active' : ''} flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none p-2`} onClick={() => setActiveMobileItem('discover')}>
+                    <p className="font-medium text-[17px] md:text-[15px]">Discover</p>
+                    <button type="button" className="block md:hidden text-[24px] font-light leading-none right-45 absolute" onClick={() => toggleMobileSection('discover')}>
+                     {mobileOpen.discover ? 'x' : '>'}
+                    </button>
+                   </li>
+                   <div className={`${mobileOpen.discover ? 'flex' : 'hidden'} md:flex flex-col gap-2 text-[14px] mt-2`}>
+                    <li className="mobile-menu-item pl-2">Introduction</li>
+                    <li className="mobile-menu-item pl-2">Market Overview</li>
+                    <li className="mobile-menu-item pl-2">Our Strength</li>
+                    <li className="mobile-menu-item pl-2">Global Offices</li>
+                    <li className="mobile-menu-item pl-2">Leadership</li>
+                    </div>
+         
+                    
+                     <li className={`mobile-menu-item ${activeMobileItem === 'company' ? 'active' : ''} flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none p-2`} onClick={() => setActiveMobileItem('company')}>
+                    <p className="font-medium text-[17px] md:text-[15px]">Company</p>
+                    <button type="button" className="block md:hidden text-[24px] font-light leading-none  right-45 absolute" onClick={() => toggleMobileSection('company')}>
+                      {mobileOpen.company ? 'x' : '>'}
+                    </button>
+                  </li>
+                    <div className={`${mobileOpen.company ? 'flex' : 'hidden'} md:flex flex-col gap-2 text-[14px]`}>
+                    <li className="mobile-menu-item pl-2">Legal Documents</li>
+                    <li className="mobile-menu-item pl-2">FAQs</li>
+                    <li className="mobile-menu-item pl-2">Terms & Conditions</li>
+                    <li className="mobile-menu-item pl-2">Privacy Policy</li>
+                    <li className="mobile-menu-item pl-2">Code of Conduct</li>
+                    <li className="mobile-menu-item pl-2">Contact Us</li>
+                    <li className="mobile-menu-item pl-2">Complaint Status</li>
+                    <li className="mobile-menu-item pl-2">Media & News</li>
+                    <li className="mobile-menu-item pl-2">Acts</li>
+                    <li className="mobile-menu-item pl-2">Find Our Agents</li>
+                    </div>
+
+                    <li className={`mobile-menu-item ${activeMobileItem === 'services' ? 'active' : ''} flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none p-2`} onClick={() => setActiveMobileItem('services')}>
+                    <p className="font-medium text-[17px] md:text-[15px]">Services</p>
+                    <button type="button" className="block md:hidden text-[24px] font-light leading-none  right-45 absolute" onClick={() => toggleMobileSection('services')}>
+                      {mobileOpen.services ? 'x' : '>'}
+                    </button>
+                    </li>
+                    <div className={`${mobileOpen.services ? 'flex' : 'hidden'} md:flex flex-col gap-2 text-[14px]`}>
+                    <li className="mobile-menu-item pl-2">Ebix for Investors</li>
+                    <li className="mobile-menu-item pl-2">Ebix for Consumers</li>
+                    <li className="mobile-menu-item pl-2">Ebix for Businesses</li> 
+                    </div>
+
+                  </ul>
+               </div>
+            </div>
             </div>
         </nav>
 
-        <div className="absolute top-30 md:top-40 text-center flex justify-center items-center flex-col" style={{zIndex: 10}}>
+        <div className="absolute top-30 md:top-40 text-center flex justify-center items-center flex-col" style={{fontFamily: "DM Sans", zIndex: 10}}>
           <div className="w-[250px] md:w-[300px] mt-[-20px] mt-0 mb-2 rounded-full m-auto py-1 text-white  text-[12px] md:text-sm border-[0.2px] border-white" >
           <span 
                   className="glowing-dot" 
@@ -290,22 +359,22 @@ function Header() {
                     boxShadow: `0 0 10px #00D4FF, 0 0 20px #00D4FF`
                   }}
                 ></span>Enough for every happiness</div>
-          <h1 className='reveal-on-load flex justify-center items-center w-[calc(100vw-2rem)] max-w-[1200px] mt-5 md:mt-5 text-[30px] md:text-[46px] text-blue-200 whitespace-normal leading-[1.2]' style={{fontFamily: "Space Grotesk", fontWeight: `lighter`, lineHeight: 1.2 }}>India’s Largest End-to-End Financial Exchange</h1>
-          <p className="reveal-on-load mt-1 md:mt-0 w-full text-[11px] md:text-xl  text-blue-100 text-wrap md:text-nowrap font-lighter " style={{fontFamily: "DM Sans"}} >Powering payments, travel, forex, remittance,
-             and financial technology<br></br> through a vast phygital network of 650,000+ outlets across India.
+          <h1 className='reveal-on-load flex justify-center items-center w-[calc(100vw-2rem)] max-w-[1200px] mt-5 md:mt-7 text-[27px] md:text-[46px] text-blue-200 whitespace-normal leading-[1.2]' style={{fontFamily: "Space Grotesk", fontWeight: `lighter`, lineHeight: 1.2 }}>India’s Largest End-to-End Financial Exchange</h1>
+          <p className="reveal-on-load mt-2 md:mt-0 w-full text-[10px] md:text-xl  text-blue-100 text-nowrap md:text-nowrap font-lighter " style={{fontFamily: "DM Sans"}} >Powering payments, travel, forex, remittance,
+             and financial technology through a vast <br></br> phygital network of 650,000+ outlets across India.
           </p>
 
-          <div className="reveal-on-load flex gap-4 justify-center mt-5 md:mt-6 ">
+          <div className="reveal-on-load flex gap-4 justify-center mt-5 md:mt-4 ">
               <button className="tracking-wider border-b-2 border-white text-nowrap italic text-center rounded-4xl herobtn font-bold text-white w-40 md:w-48">
                 {btnitems}
               </button>
-              <button className="flex tracking-wide text-nowrap text-center font-extrabold px-5 py-2 rounded-4xl bg-white outline-offset-8 outline-amber-800">Explore<MdOutlineArrowRight size="1.6rem"/></button>
+              <button className="flex tracking-wide text-nowrap text-center font-semibold px-5 py-2 rounded-4xl bg-white outline-offset-8 outline-amber-800">Explore<MdOutlineArrowRight size="1.6rem"/></button>
           </div>
           
           <div>
           </div>
           
-          <div className="reveal-on-load w-full max-w-[1200px] h-[170px] rounded-2xl m-auto movingCards flex items-center overflow-hidden mt-[4px]" style={{zIndex: 10}}>
+          <div className="reveal-on-load w-full max-w-[1200px] h-[170px] rounded-2xl m-auto movingCards flex items-center overflow-hidden mt-[12px]" style={{zIndex: 10}}>
             <div className="movingCards-track">
               {[0, 1].map((group) => (
                 <div className="movingCards-group" key={group} aria-hidden={group === 1}>
@@ -323,7 +392,7 @@ function Header() {
             </div>
           </div>
           
-         <div className="mt-7 md:mt-12 text-center text-blue-100 text-[12px]" style={{fontFamily: "DM Sans"}}>We Strengthen India's Biggest Brands </div>
+         <div className="mt-7 md:mt-20 text-center text-blue-100 text-[12px] md:text-[14px]" style={{fontFamily: "DM Sans"}}>We Strengthen India's Biggest Brands </div>
         </div>
        
 
@@ -374,20 +443,20 @@ function Header() {
       </div>
 
       <div className="relative bg-gray-400 w-full mt-[-40px] md:mt-[-20px] flex justify-center mx-auto">
-        <div className="md:ml-10 md:mr-10 absolute flex flex-col md:flex-row justify-center items-center gap-1 md:gap-8 w-full max-w-[1400px]">
+        <div className="ml-0 mr-0 md:ml-10 md:mr-10 absolute flex flex-col md:flex-row justify-center items-center gap-1 md:gap-8 w-full max-w-[1400px]">
           <div className="m-2 w-[calc(100%-2rem)] max-w-[420px] rounded-xl min-h-[17rem] md:h-[18rem] md:w-[44%] md:min-w-[100px] bg-cover bg-center card-shine investors-shine" style={{ backgroundImage: `linear-gradient(135deg, #0635e1 0%, #01287c 100%)`}}>
-            <div className="float-right mt-15 mr-0 text-justify w-[150px]"><img className="" src={investors} /></div>
+            <div className="float-right mt-10 mr-0 text-justify w-[150px]"><img className="" src={investors} /></div>
             <div className="p-6">
-              <h2 className=" pl-2 text-3xl text-white border-l-2" style={{fontFamily: "Italianno", cursive: 'true'}}>Investors</h2>
-              <p className=" mt-3 font-semibold text-left text-justify text-white servicetext text-sm md:text-md" style={{fontSize: `14px`}}> Driving sustainable growth through innovation, transparency, and disciplined execution.
+              <h2 className="pl-2 text-3xl text-white border-l-2" style={{fontFamily: "Italianno", cursive: 'true'}}>Investors</h2>
+              <p className=" mt-3 font-medium text-left text-justify text-white text-[12px] md:text-[13px]" style={{fontFamily: "DM Sans", fontWeight: "normal"}}> Driving sustainable growth through innovation, transparency, and disciplined execution.
               Committed to creating long-term value for our investors and stakeholders.</p>
             </div>
-            <div className="mt-[-11px]  md:mt-[-10px]">
-              <ul className="border-white flex flex-wrap gap-2 ml-6  text-white text-center investors">
-                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Investors Home</li>
-                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Quarterly Results</li>
-                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Leadership<br></br></li>
-               <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Announcements</li>
+            <div className="mt-[-3px]  md:mt-[-10px]">
+              <ul className="border-white flex flex-wrap gap-2 ml-6  text-white text-center font-semibold  text-[12px] ">
+                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="">Investors Home</li>
+                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="">Quarterly Results</li>
+                <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="">Leadership<br></br></li>
+               <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="">Announcements</li>
                 <br></br>
                 
               
@@ -395,17 +464,17 @@ function Header() {
               </ul>
               
             </div>
-            <button className="float-right mt-[-10px] mr-7 text-white rotate-180"><img src={swipe} alt="Swipe" className="w-8 md:w-10"/></button>
+            <button className="float-right mt-[-10px] md:mt-[-2px] mr-7 text-white rotate-180"><img src={swipe} alt="Swipe" className="w-8 md:w-10"/></button>
           </div>
 
           <div className="m-2 w-[calc(100%-2rem)] max-w-[420px] rounded-xl min-h-[17rem] md:w-[44%] md:min-w-[300px] card-shine consumers-shine" style={{ backgroundImage: `linear-gradient(135deg, #057d03 0%, #0f560b 100%)`}}>
-           <div className="float-right mt-14 mb-0 text-justify w-[130px]"><img src={consumers} /></div>
+           <div className="float-right mt-10 mb-0 text-justify w-[150px]"><img src={consumers} /></div>
             <div className="p-6">
               <h2 className=" pl-2 text-3xl text-white border-l-2" style={{fontFamily: "Italianno", cursive: 'true'}}>Consumers</h2>
-              <p className=" mt-3 font-semibold text-left text-justify text-white servicetext text-sm md:text-md" style={{fontSize: `14px`}}>Everything You Need. One Trusted Platform.
+              <p className=" mt-3 font-medium text-left text-justify text-white text-[12px] md:text-[13px]" style={{fontFamily: "DM Sans", fontWeight: "normal"}}>Everything You Need. One Trusted Platform.
                From travel and payments to insurance and healthcare, experience smarter everyday services in one seamless ecosystem.</p>
             </div>
-            <div className=" mt-[-14px] md:mt-[-4px]">
+            <div className=" mt-[-4px] md:mt-[-13px]">
               <ul className="flex flex-wrap gap-2 ml-6 font-bold text-white investors ">
                 <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Transport</li>
                 <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Hotels & Flight</li>
@@ -420,13 +489,13 @@ function Header() {
           </div>
 
           <div className="m-2 w-[calc(100%-2rem)] max-w-[420px] rounded-xl min-h-[17rem] md:w-[45%] md:min-w-[300px] card-shine business-shine" style={{ backgroundImage: `linear-gradient(135deg, #5c007e 0%, #450655f8 100%)`}}>
-            <div className="float-right mt-14 mb-0 text-justify w-[120px]"><img className="max-w-full h-auto" src={businessimg} /></div>
+            <div className="float-right mt-8 mb-0 text-justify w-[128px]"><img className="max-w-full h-auto" src={businessimg} /></div>
             <div className="p-6">
               <h2 className="pl-2 text-3xl text-white border-l-2" style={{fontFamily: "Italianno", cursive: 'true'}}>Business</h2>
-              <p className=" mt-3 font-semibold text-left text-justify text-white servicetext text-sm md:text-md" style={{fontSize: `14px`}}>Powering Businesses with Intelligent Digital Solutions.
+              <p className=" mt-3 font-medium text-left text-justify text-white text-[12px] md:text-[13px]" style={{fontFamily: "DM Sans", fontWeight: "normal"}}>Powering Businesses with Intelligent Digital Solutions.
               Payments, travel, fintech and telecom, help enterprises simplify operations, accelerate growth, and good customer experiences.</p>
             </div>
-            <div className=" mt-[-14px] md:mt-[-4px]">
+            <div className=" mt-[-14px] md:mt-[-14px]">
               <ul className="flex flex-wrap gap-2 ml-6 font-bold text-white investors ">
                 <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Payment Solutions</li>
                 <div style={{width: `17px`, height: `17px`, backgroundImage: `url(${icon})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}></div><li className="text-[12px]">Travel Services</li>
@@ -442,17 +511,17 @@ function Header() {
        </div>
     
 
-    <section className="w-full h-[80rem] md:h-[40rem] relative mt-[58rem] md:mt-[380px] flex flex-col ">
+    <section className="w-full h-[80rem] md:h-[40rem] relative mt-[58rem] md:mt-[370px] flex flex-col ">
      
     <div className=" gap-10 absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${About})` }}>
     <div className="flex flex-col-reverse md:flex-row">   
-      <div className="w-[26rem] md:w-[30rem] mt-30 md:mt-16 mx-auto "> 
+      <div className="w-[26rem] md:w-[28rem] mt-30 md:mt-13 mx-auto "> 
         <div className="relative m-3 md:m-0">
-          <img className=" rounded-xl h-55" src={ebix} style={{width: `36rem`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}/>
+          <img className=" rounded-xl h-66" src={ebix} style={{width: `36rem`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}/>
         </div>
      
      
-     <div className="flex  flex-nowrap border mt-8 rounded-2xl border text-[13px] py-2 px-4 bg-blue-100 m-3 mt-0 " style={{fontFamily: "Sans-serif"}}>
+     <div className="flex flex-nowrap  mt-10 rounded-xl text-[13px] py-2 px-4 bg-blue-100" style={{fontFamily: "Sans-serif"}}>
       <span className="border-r flex justify-center bg-blue-100 w-[12rem] h-[3rem] white bottom-75 text-center  text-black  px-1 py-1" ><img className="mr-2" src={employees} style={{width: `26px`, height: `26px`}} />10,431<br></br> Employees</span>
       <span className="border-r flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={residential} style={{width: `26px`, height: `26px`}} /> 22+ years<br></br> in Business</span>
       <span className=" flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={globe} style={{width: `25px`, height: `25px`}} /> 196 countries<br></br>offices</span>
@@ -461,10 +530,10 @@ function Header() {
     </div>
   
     
-    <div className="w-full md:w-[50rem] m-0 mt-6 md:m-10 md:mt-10 aboutheading">
-    <h1 className="  text-center  md:p-0 text-blue-400 text-5xl" style={{fontFamily: "DM Sans", fontWeight: "400"}}>About EbixCash</h1>
-    <div className="w-90 mx-auto bg-white border-t border-white "></div>
-    <ul className="aboutdescription text-xl md:text-3xl pl-4  pr-4 pt-1 md:p-0 mt-[-130px] text-white">
+    <div className="w-full md:w-[50rem] m-0 mt-6 md:m-10 md:mt-8 aboutheading">
+    <h1 className="  md:p-0 text-blue-400 text-5xl text-center" style={{fontFamily: "DM Sans", fontWeight: "400"}}>About EbixCash</h1>
+    <div className="w-90 md:w-full  mx-auto bg-white border-t border-white "></div>
+    <ul className="aboutdescription text-xl md:text-3xl pl-4 pr-4 pt-1 md:p-0 mt-[-130px] text-white">
       <li>EbixCash, has today emerged as India’s largest end-to-end financial exchange, that includes a last mile network of over 650,000 physical distribution outlets besides an omni-channel online digital platform. 
            EbixCash converges front-end distribution channels with back-end technology functions, across the payments solutions, travel, insurance and financial technology industries.</li>
       <li className="hidden md:block">The EbixCash Exchange employs more than 10,431 employees across different sectors with 196 offices across the Asia Pacific region. 
@@ -473,7 +542,7 @@ function Header() {
          EbixCash portfolio of products can be accessed digitally anywhere as well as across its distribution outlets spread over 4,000 cities and 75,000 villages.</li>
 
       <li>EbixCash business encompasses four primary business segments - (1) Payments Solutions (2) Travel (3) Financial Technologies (4) BPO and Startups.</li>
-      <div className="mt-5 md:mt-2 flex gap-6 text-[14px] mx-auto">
+      <div className="mt-5 md:mt-2 flex gap-6 text-[14px] mx-auto md:m-0">
       <button type="button" onClick={() => setIsWatchVideoOpen(true)} className="border flex px-7 py-1 bg-white text-black rounded-full" style={{boxShadow: `-3px 4px 0px oklch(62.3% 0.214 259.815)`, fontFamily: "Sans-serif"}} > Watch Now <img className="ml-2" src={youtube} width={22} height={10}/></button>
       <button className="border flex px-5 py-1 bg-white text-black rounded-full " style={{fontFamily: "Sans-serif"}}> Explore Now <img className="ml-2" src={arrow} width={22} height={10}/></button>
       </div>
@@ -501,7 +570,7 @@ function Header() {
         </div>
       )}
     
-      <div className="absolute ml-[80px] mt-110 md:ml-[34rem] md:mt-62 mx-auto text-justify  ">
+      <div className="absolute ml-[80px] mt-110 md:ml-[35rem] md:mt-62 mx-auto text-justify  ">
   
       <RatingBadge rating={5} title="The Economic Times Recognizes" subtitle="EbixCash as the Best Brand 2020-21"  />
      
@@ -514,14 +583,14 @@ function Header() {
     </div>
 
 
-    <div ref={statsRef} className="w-full mx-auto ">
-      <div  className="W-full mt-5 m-10 ">
-        <ul className=" grid  grid-cols-2 w-full h-[10rem] flex  justify-center items-center gap-5 md:gap-20 text-white text-wrap "  >
+    <div ref={statsRef} className="w-full mx-auto  ">
+      <div  className="W-full mt-5 md:mt-0 m-10 ">
+        <ul className=" grid  grid-cols-2  w-full h-[10rem] md:flex  justify-center items-center gap-5 md:gap-20 text-white text-wrap "  style={{fontFamily: "DM Sans"}} >
           <li className='flex flex-col text-center '><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>{statValues[0]}+</span>Leanding and Wealth Solutions Installed</li>
           <li className='flex flex-col text-center'><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>{statValues[1]} M+</span>Annual Travel Bookings</li>
           <li className='flex flex-col text-center'><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>{statValues[2]} M+</span>Health Content Users</li>
           <li className='flex flex-col text-center'><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>${statValues[3]} B+</span>Annual Money Remittance Managed</li>
-          <li className='flex flex-col text-center hidden  md:block'><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>{statValues[4]} M+</span>Annual Compliance Images Processed</li>
+          <li className='flex flex-col text-center hidden  md:flex'><span className="text-4xl md:text-5xl " style={{fontFamily: "DM Sans"}}>{statValues[4]} M+</span>Annual Compliance Images Processed</li>
           
 
         </ul>
@@ -538,7 +607,7 @@ function Header() {
       
     </section>
 
-    <section className="mt-[60px] md:mt-[-10px]" >
+    <section className="mt-[60px] md:mt-0" >
       <div className="border-b-4 border-blue-400 flex flex-col md:flex-row absolute w-full h-[37rem] md:h-[20rem] bg-blue-800 gap-10" style={{
             backgroundImage: `linear-gradient(0deg, rgba(3, 29, 125, 0.68) 0%, rgba(3, 28, 122, 0.68) 100%), url(${phoneapp})`,
             backgroundSize: 'cover',
@@ -554,9 +623,9 @@ function Header() {
         
         
         <div  className=" text-white w-[100vw] md:w-full ml-0 mt-0 md:mt-[35px] md:ml-[-5rem] md:mt-10  p-2 md:p-0  ">
-          <p className="font-semibold text-[21px] md:text-[34px] mt-[-170px] md:mt-[-6px] text-center" style={{fontFamily: "DM Sans"}}>EbixCash - UPI, Wallet and Payments</p>
-          <p className="pl-2 pr-2 mt-[1px] text-[14px] md:text-[14px] mt-0 text-white text-justify text-center" style={{fontFamily: "DM Sans"}}>One App. Every Essential. From instant payments and seamless money transfers to forex, gift cards, and travel bookings, EbixCash<br className="hidden md:block"></br> brings all your everyday financial services together in one secure, intelligent experience.</p>
-          <ul className="mt-1 pl-2 " style={{fontFamily: "DM Sans"}}>
+          <p className="font-semibold text-[21px] md:text-[34px] mt-[-170px] md:mt-[-6px] text-center md:text-left" style={{fontFamily: "DM Sans"}}>EbixCash - UPI, Wallet and Payments</p>
+          <p className="pl-2 pr-2 md:pl-0 md:pr-0  mt-[1px] text-[14px] md:text-[14px] mt-0 text-white text-justify text-center md:text-left" style={{fontFamily: "DM Sans"}}>One App. Every Essential. From instant payments and seamless money transfers to forex, gift cards, and travel bookings, EbixCash<br className="hidden md:block"></br> brings all your everyday financial services together in one secure, intelligent experience.</p>
+          <ul className="mt-1 pl-2 md:pl-0 " style={{fontFamily: "DM Sans"}}>
             <li className="flex text-[14px]
              mb-2" ><img src={icon} className="w-5 h-5 mr-1"/> Instant UPI Payments & Money Transfers</li>
             <li className="flex text-[14px] mb-2"><img src={icon} className="w-5 h-5 mr-1"/> Travel & Forex at Your Fingertips</li>
@@ -590,17 +659,17 @@ function Header() {
     </section>
 
     <section >
-       <div className="absolute mt-150 md:mt-80 w-full h-[85rem] flex flex-col md:flex-row md:flex-row-reverse">
+       <div className="absolute mt-150 md:mt-90 w-full h-[85rem] flex flex-col md:flex-row md:flex-row-reverse">
 
         <div className="flex flex-col md:relative mt-[-30px] md:mt-20 ml-5 md:ml-20">
           <div>
-            <p className="mt-8 flex font-medium text-[50px] text-blue-900" style={{fontFamily: "Space Grotesk", letterSpacing: `-0.01cm` }}>Contact Us</p>
+            <p className="mt-8 md:mt-[-20px] flex font-medium text-[50px] text-blue-900" style={{fontFamily: "Space Grotesk", letterSpacing: `-0.01cm` }}>Contact Us</p>
             <p className="text-[15px]  mt-[-15px] pl-1" style={{fontFamily: "Space Grotesk", letterSpacing: `-0.01cm` }}>Write to us and we'll get back to you soon. Promise!</p>
           </div>
           
           <div>
-            <form className='w-full md:w-[40rem] h-[45rem] rounded-2xl mt-[30px] flex justify-center items-center pl-1'>
-              <div className='flex w-full md:w-[40rem] h-[50rem] md:h-[40rem] pt-1 flex-nowrap flex-col gap-6 mx-auto' >
+            <form className='w-full md:w-[40rem] h-[45rem] rounded-2xl mt-[30px] md:mt-[-40px] flex justify-center items-center pl-1'>
+              <div className='flex w-full md:w-[40rem] h-[50rem] md:h-[40rem] pt-1 flex-nowrap flex-col gap-6  md:gap-8 mx-auto' >
               
               <div className='flex flex-col gap-4 mt-6' style={{fontFamily: "DM Sans"}}>
               <label className="relative font-medium">First Name<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><input
@@ -629,11 +698,11 @@ function Header() {
               name="mobile"
               id="mobile"
               required
-              className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-5 border-b-2 border-blue-900"
+              className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-13 border-b-2 border-blue-900"
               /></label>
               
 
-              <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Category<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><select className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-5 border-b-2 border-blue-900">
+              <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Category<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><select className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-7 border-b-2 border-blue-900">
                 <option value="Jobs"></option>
                 <option value="Jobs">Jobs</option>
                 <option value="Complaints">Complaints</option>
@@ -650,11 +719,11 @@ function Header() {
               name="email"
               id="email"
               required
-              className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-5 border-b-2  border-blue-900"
+              className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-14 border-b-2  border-blue-900"
               /></label>
              
 
-              <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Country<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><select className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-5 border-b-2 border-blue-900">
+              <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Country<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><select className="bg-blue-100 rounded w-[23rem] md:w-[21rem] md:w-1/2 h-8  px-1  ml-0 md:ml-9 border-b-2 border-blue-900">
                 <option value="Jobs"></option>
                 <option value="Jobs">India</option>
                 <option value="Complaints">USA</option>
@@ -685,20 +754,20 @@ function Header() {
                 </div></label>
                
 
-                <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Additional Information<sup className="absolute mt-6 text-[15px] text-red-800">*</sup><br className="block md:hidden"></br><div>
+                <label className='relative font-medium' style={{fontFamily: "DM Sans"}}>Additional Information<br className="block md:hidden"></br><div>
                 <textarea rows={3} cols={10} className="bg-blue-100 rounded h-13 md:h-10 px-1 w-[21rem] md:w-[26rem]"/>
                 </div>  </label>
                            
               </div>
               
-              <div className="left-10 mb-50 "><button className=" rounded-full px-5 py-2 text-black bg-yellow-400 font-medium" style={{fontFamily: "DM Sans"}}>Submit Request</button></div>
+              <div className="left-10 mb-50 "><button className=" rounded-full px-5 py-2 text-black bg-yellow-400 font-medium text-[13px]" style={{fontFamily: "DM Sans"}}>Submit Request</button></div>
               </div>
             </form>  
           </div> 
         </div>
 
         <div
-          className="mx-auto relative overflow-hidden bg-blue-700 mt-20 w-[25rem] md:w-[26rem] min-h-[40rem] md:min-h-[45rem] rounded-4xl bg-gradient-to-t from-blue-800 via-blue-700 to-blue-800"
+          className="mx-auto relative overflow-hidden bg-blue-700 mt-20 w-[25rem] md:w-[28rem] min-h-[40rem] md:h-[45rem] rounded-4xl bg-gradient-to-t from-blue-800 via-blue-700 to-blue-800"
           style={{
             backgroundImage: `linear-gradient(65deg, rgba(10, 34, 114, 0.8), rgba(30, 64, 175, 0.8)), url(${contact91})`,
             backgroundSize: 'cover',
@@ -707,7 +776,7 @@ function Header() {
           }}
         >
 
-        <div className="flex flex-col ml-8 mt-7 md:mt-2">
+        <div className="flex flex-col ml-8 mt-7 md:mt-10">
           <p className="text-bolder text-[40px] text-white" style={{fontFamily: "Space Grotesk", letterSpacing: `-0.01cm` }}>Let's Connect</p>
           
           <p className="mt-[-5px] text-bolder text-[12px] text-white" style={{fontFamily: "Space Grotesk"}} >Have a question, project idea, or collaboration in mind? We'd love to hear from you.</p>
@@ -732,7 +801,7 @@ function Header() {
        </div>
     </section>
 
-    <footer className="w-full h-auto h-[87rem] md:h-[49rem] absolute mt-550 bg-blue-800 bg-gradient-to-t from-blue-600 via-blue-700 to-blue-800" 
+    <footer className="w-full h-auto md:h-[49rem] absolute mt-550 md:mt-320 bg-blue-800 bg-gradient-to-t from-blue-600 via-blue-700 to-blue-800" 
           style={{
             backgroundImage: `linear-gradient(95deg, #001e8a 0%, #00287e 100%)`,
             backgroundSize: 'cover',
@@ -746,7 +815,7 @@ function Header() {
           <div className="m-2 md:ml-10 logo flex flex-start flex-col w-full md:w-[100rem]">              
                   <img src={logos} alt="logo" width={190} />
                   <div className="flex-col">
-                  <p className="mt-[-27px] ml-4 text-white text-[15px] md:text-[20px] text-bold" style={{fontFamily: "DM Sans"}}>India’s Largest End-to-End Financial Exchanges</p>
+                  <p className="mt-[-27px] ml-4 text-white text-[15px] md:text-[13px] text-bold" style={{fontFamily: "DM Sans"}}>India’s Largest End-to-End Financial Exchanges</p>
                   <p className="mt-[-2px] ml-4 text-white text-[10px] md:text-[8px]  italic"style={{fontFamily: "DM Sans"}}>Powering payments, travel, forex, remittance, and financial technology<br></br> through a vast
                    phygital network of 650,000+ outlets<br></br> across India.</p>
                   </div>
@@ -760,16 +829,16 @@ function Header() {
           
 
      </div>
-     {/* <div className="w-[25rem] md:w-[82rem] border-t-[0.1px] border-blue-400 mx-auto mt-10 md:mt-3" ></div> */}
+      <div className="hidden md:block w-[25rem] md:w-[82rem] border-t-[0.1px] border-blue-400 mx-auto mt-10 md:mt-3" ></div> 
 
 
-    <div className="px-6 md:px-0 mx-auto flex flex-col gap-0 md:gap-15 text-white mt-10 ">
+    <div className="px-6 md:px-0 mx-auto flex flex-col md:flex-row gap-0 md:gap-18 text-white mt-10 md:mt-5 ">
       
       <div className="">
-        <ul className="flex flex-col gap-0 ml-0 md:ml-18 " style={{fontFamily: "DM Sans"}}>
-          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 mb-2 p-1">
-            <p className="font-medium text-[17px]">Discover EbixCash</p>
-            <button type="button" className="text-[24px] font-light leading-none" onClick={() => toggleFooterSection('discover')}>
+        <ul className="flex flex-col gap-0 ml-0 md:ml-17 " style={{fontFamily: "DM Sans"}}>
+          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none mb-2  p-1 md:p-0">
+            <p className="font-medium text-[17px] md:text-[15px]">Discover EbixCash</p>
+            <button type="button" className="block md:hidden text-[24px] font-light leading-none" onClick={() => toggleFooterSection('discover')}>
               {footerOpen.discover ? 'x' : '>'}
             </button>
           </li>
@@ -786,9 +855,9 @@ function Header() {
 
       <div>
         <ul className=" flex flex-col gap-1 ml-0" style={{fontFamily: "DM Sans"}}>
-          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 mb-2 p-1">
+          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none mb-2 md:mb-1 p-1 md:p-0">
             <p className="font-medium text-[17px]">Investors</p>
-            <button type="button" className="text-[24px] font-light leading-none" onClick={() => toggleFooterSection('investors')}>
+            <button type="button" className="block md:hidden text-[24px] font-light leading-none" onClick={() => toggleFooterSection('investors')}>
               {footerOpen.investors ? 'x' : '>'}
             </button>
           </li>
@@ -808,9 +877,9 @@ function Header() {
 
       <div>
         <ul className="flex flex-col gap-1" style={{fontFamily: "DM Sans"}}>
-          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 mb-2 p-1">
-            <p className="font-medium text-[17px]">EbixCash for Consumer</p>
-            <button type="button" className="text-[24px] font-light leading-none" onClick={() => toggleFooterSection('consumer')}>
+          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none mb-2 md:mb-1 p-1 md:p-0">
+            <p className="font-medium text-[17px] md:text-[15px]">EbixCash for Consumer</p>
+            <button type="button" className="block md:hidden text-[24px] font-light leading-none" onClick={() => toggleFooterSection('consumer')}>
               {footerOpen.consumer ? 'x' : '>'}
             </button>
           </li>
@@ -830,9 +899,9 @@ function Header() {
 
       <div>
         <ul className="flex flex-col gap-1" style={{fontFamily: "DM Sans"}}>
-          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 mb-2 p-1">
-            <p className="font-medium text-[17px]">EbixCash for Business</p>
-            <button type="button" className="text-[24px] font-light leading-none" onClick={() => toggleFooterSection('business')}>
+          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none mb-2 md:mb-1 p-1 md:p-0">
+            <p className="font-medium text-[17px] md:text-[15px]">EbixCash for Business</p>
+            <button type="button" className="block md:hidden text-[24px] font-light leading-none" onClick={() => toggleFooterSection('business')}>
               {footerOpen.business ? 'x' : '>'}
             </button>
           </li>
@@ -856,9 +925,9 @@ function Header() {
       
       <div>
         <ul className="flex flex-col gap-1" style={{fontFamily: "DM Sans"}}>
-          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 mb-2 p-1">
-            <p className="font-medium text-[17px]">Ebixcash (PPI)</p>
-            <button type="button" className="text-[24px] font-light leading-none" onClick={() => toggleFooterSection('ppi')}>
+          <li className="flex items-center justify-between border-b-[0.1px] border-blue-400 md:border-none mb-2 md:mb-1 p-1 md:p-0">
+            <p className="font-medium text-[17px] md:text-[15px]">Ebixcash (PPI)</p>
+            <button type="button" className="block md:hidden text-[24px] font-light leading-none" onClick={() => toggleFooterSection('ppi')}>
               {footerOpen.ppi ? 'x' : '>'}
             </button>
           </li>
@@ -907,9 +976,9 @@ function Header() {
 
      
 
-      <div className="w-150 h-20 ">
-        <img src={monument} className=" mt-10 z-10 relative"  />
-        <div><img src={train} alt="train" className="train-animation w-60 z-100 absolute bottom-0 left-full" /></div>
+      <div className="w-150 h-20 md:w-full md:h-10">
+        <img src={monument} className=" mt-10 md:mt-0 z-10 relative"  />
+        <div><img src={train} alt="train" className="train-animation w-60 md:w-80 z-100 absolute bottom-0 left-full" /></div>
       </div>
 
      
