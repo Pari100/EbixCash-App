@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/Logos.png';
+import logo from '../assets/logos.png';
 import './spinner.css';
 
  const Spinner = () => {
