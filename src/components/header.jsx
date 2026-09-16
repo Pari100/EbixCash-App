@@ -515,13 +515,13 @@ function Header() {
      
     <div className=" gap-10 absolute inset-0 bg-cover bg-no-repeat" style={{ backgroundImage: `url(${About})` }}>
     <div className="flex flex-col-reverse md:flex-row">   
-      <div className="w-[26rem] md:w-[28rem] mt-30 md:mt-13 mx-auto "> 
-        <div className="relative m-3 md:m-0">
+      <div className="w-[26rem] md:w-[28rem] mt-30 md:mt-16 mx-auto ">
+        <div className="relative m-3 md:m-0 gap-10">
           <img className=" rounded-xl h-66" src={ebix} style={{width: `36rem`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}/>
         </div>
      
      
-     <div className="flex flex-nowrap  mt-10 rounded-xl text-[13px] py-2 px-4 bg-blue-100 m-3 md:m-0 " style={{fontFamily: "DM Sans"}}>
+     <div className="relative flex flex-nowrap  top-0 md:top-7  mt-10 rounded-xl text-[13px] py-2 px-4 bg-blue-100 m-3 md:m-0 " style={{fontFamily: "DM Sans"}}>
       <span className="border-r flex justify-center bg-blue-100 w-[12rem] h-[3rem] white bottom-75 text-center  text-black  px-1 py-1" ><img className="mr-2" src={employees} style={{width: `26px`, height: `26px`}} />10,431<br></br> Employees</span>
       <span className="border-r flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={residential} style={{width: `26px`, height: `26px`}} /> 22+ years<br></br> in Business</span>
       <span className=" flex justify-center  bg-blue-100 w-[12rem] h-[3rem] top-20 left-10 text-center  text-black px-1 py-1" ><img className="mr-2" src={globe} style={{width: `25px`, height: `25px`}} /> 196 countries<br></br>offices</span>

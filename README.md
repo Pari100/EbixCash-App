@@ -2,6 +2,10 @@
 
 # EbixCash-App
 
+## AI assistant setup
+
+Copy `.env.example` to `.env`, replace the placeholder with your Gemini API key, and restart the Vite server. The key must be named `GEMINI_API_KEY`; Vite does not load `.env.example` automatically.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

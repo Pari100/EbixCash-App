@@ -55,11 +55,6 @@ export const testimonialData = [
     company: 'Digital Innovations Ltd.',
     review: 'The platform is smooth, secure, and easy to use. It helped us improve customer experience greatly.'
   },
-  
-  
-  
-
-  
 ]
 
 
@@ -71,9 +66,9 @@ function Testimonial() {
       <div className="absolute inset-y-0 right-0 w-4 bg-gradient-to-l from-white to-transparent pointer-events-none z-20" />
       <div className="relative flex flex-row testimonial-track h-[30rem] gap-10 justify-center items-center mt-[-40px] ml-2 ">
    
-      {testimonialData.map((data) => (
+      {testimonialData.map((data, index) => (
       
-        <div key={data.id} className=" flex flex-col justify-center items-center w-[25rem] h-[14rem] rounded-2xl bg-gradient-to-t from-blue-900 via-blue-700 to-blue-900">
+        <div key={`${data.id}-${index}`} className=" flex flex-col justify-center items-center w-[25rem] h-[14rem] rounded-2xl bg-gradient-to-t from-blue-900 via-blue-700 to-blue-900">
 
             <div className="absolute rounded-full bg-white w-[100px] h-[100px] mt-[-250px]"><img className="rounded-full w-[80px] h-[80px] mx-auto mt-3 object-cover" src={data.image} alt="customer"/></div>
             <RiDoubleQuotesL width={100} className='bg-blue-100 rounded-full w-10 h-10 p-2 ml-[-250px] mt-[-120px] text-blue-900 absolute'/>
